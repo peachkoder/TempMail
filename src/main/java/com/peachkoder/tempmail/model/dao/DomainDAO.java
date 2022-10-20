@@ -40,9 +40,7 @@ public class DomainDAO {
 			if (body.isBlank())
 				return null;
 
-			body = body.replace("[", "");
-			body = body.replace("]", "");
-			body = body.replace("\"", "");
+			body = body.replace("[", "").replace("]", "").replace("\"", "");
 
 			String[] domains = body.split(",");
 			Set<String> set = new HashSet<>(Arrays.asList(domains)); 
@@ -60,10 +58,8 @@ public class DomainDAO {
 
 			}
 
-		} catch (URISyntaxException | IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
+		} catch (URISyntaxException | IOException | InterruptedException e) { 
+			e.printStackTrace(); 
 		}
 
 		return repository.findAll();

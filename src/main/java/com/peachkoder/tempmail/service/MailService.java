@@ -30,19 +30,6 @@ public class MailService {
 	}
 
 
-	public String getDomainList() throws URISyntaxException, IOException, InterruptedException {
-
-		URI uri = new URI("https://www.1secmail.com/api/v1/?action=getDomainList");
-		HttpRequest request = HttpRequest.newBuilder()
-				.uri(uri)
-				.GET()
-				.build();
-		HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-		
-		return response.body();
-	}
-
-
 	public String getMessages(String login, String domain) throws URISyntaxException, IOException, InterruptedException {
 		
 		StringBuilder builder = new StringBuilder();
