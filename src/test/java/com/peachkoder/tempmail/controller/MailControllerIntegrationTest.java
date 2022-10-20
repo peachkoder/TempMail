@@ -18,7 +18,7 @@ import com.peachkoder.tempmail.service.DomainService;
 import com.peachkoder.tempmail.service.MailService;
 
 @WebMvcTest
-public class MailControllerTest {
+public class MailControllerIntegrationTest {
 	
 	@Autowired
 	private WebApplicationContext applicationContext;
