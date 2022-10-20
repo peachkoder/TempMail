@@ -2,6 +2,7 @@ package com.peachkoder.tempmail.controller;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.peachkoder.tempmail.model.entity.Domain;
+import com.peachkoder.tempmail.service.DomainService;
 import com.peachkoder.tempmail.service.MailService;
 
 @RestController
@@ -18,6 +21,9 @@ public class MailController {
 	
 	@Autowired
 	private MailService mailService;
+	
+	@Autowired
+	private DomainService domainService;
 	
 	@RequestMapping("/new")
 	private ResponseEntity<String> createMail(@RequestParam Integer count) {
@@ -31,15 +37,15 @@ public class MailController {
 	}
 	
 	@RequestMapping("/domainlist")
-	private ResponseEntity<String> getActiveDomains() {
-		try {
-			String list = mailService.getDomainList();
-			return ResponseEntity.ok(list);
-		} catch (URISyntaxException | IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ResponseEntity.notFound().build();
+	private ResponseEntity<List<Domain>> getActiveDomains() {
+		
+		List<Domain> allDomains = domainService.getAllDomains();
+		
+		if (allDomains == null)
+			return ResponseEntity.notFound().build(); 
+		
+		return ResponseEntity.ok(allDomains);
+ 
 	}
 	
 	@RequestMapping("/messages")
