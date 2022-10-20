@@ -50,7 +50,9 @@ public class MailController {
 	
 	@RequestMapping("/messages")
 	private ResponseEntity<?> getMessages(@RequestParam @NonNull String login, @RequestParam @NonNull String domain){
-		String message;
+		
+		String message = "";
+		
 		try {
 			message = mailService.getMessages(login, domain);
 			if (message.equals("[]"))
